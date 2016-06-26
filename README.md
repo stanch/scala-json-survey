@@ -8,21 +8,22 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 
 ## Basic features
 
-| Base library | Custom codecs | Automatic codec derivation | Immutable manipulation | JSON Schema |
-| --- | --- | --- | --- | --- |
-| [Argonaut][10] | [typeclass-based][16] | [shapeless-based][14] | [included, zipper-based][11] | ? |
-| [Circe][20] | [typeclass-based][20] | [included, shapeless-based][20] | [included, zipper-based][20] | ? |
-| [Play JSON][1] | [typeclass-based][17] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][5] |
-| [Spray JSON][12] | [typeclass-based][12] | [included, reflection-based][12]; [shapeless-based][13] | [lens-based][15] | ? |
+| Base library | Custom codecs | Automatic codec derivation | Immutable manipulation | Diff & patch | JSON Schema |
+| --- | --- | --- | --- | --- | --- |
+| [Argonaut][10] | [typeclass-based][16] | [shapeless-based][14] | [included, zipper-based][11] | [yes][24] | ? |
+| [Circe][20] | [typeclass-based][20] | [included, shapeless-based][20] | [included, zipper-based][20] | [no][25] | ? |
+| [json4s][21] | [reflection-based][22] | [included, reflection-based][22] | [included, path-based][23] | [included][26] | ? |
+| [Play JSON][1] | [typeclass-based][17] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][27] | [yes][5] |
+| [Spray JSON][12] | [typeclass-based][12] | [included, reflection-based][12]; [shapeless-based][13] | [lens-based][15] | [yes][27] | ? |
 
 ## Library support
 
-| Library | Argonaut | Circe | Play JSON | Spray JSON |
-| --- | --- | --- | --- | --- |
-| Akka HTTP | [yes][6] | [yes][6] | [yes][6] | [yes][6]
-| JWT | ? | [yes][7] | [yes][7] | [yes][7] |
-| Slick Postgres | [yes][8] | [yes][8] | [yes][8] | [yes][8] |
-| GeoJSON | [yes][19] | ? | [yes][9] | [yes][18] |
+| Library | Argonaut | Circe | json4s | Play JSON | Spray JSON |
+| --- | --- | --- | --- | --- | --- |
+| Akka HTTP | [yes][6] | [yes][6] | [yes][6] | [yes][6] | [yes][6] |
+| JWT | ? | [yes][7] | [yes][7] | [yes][7] | [yes][7] |
+| Slick Postgres | [yes][8] | [yes][8] | [yes][8] | [yes][8] | [yes][8] |
+| GeoJSON | [yes][19] | ? | ? | [yes][9] | [yes][18] |
 
 ## Links and resources
 
@@ -50,3 +51,10 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 [18]: https://github.com/MonsantoCo/mwundo
 [19]: https://github.com/shiplog/argonaut-geojson
 [20]: https://github.com/travisbrown/circe
+[21]: https://github.com/json4s/json4s
+[22]: https://github.com/json4s/json4s#serialization
+[23]: https://github.com/json4s/json4s#xpath--hofs
+[24]: https://github.com/stacycurl/delta/blob/master/argonaut/src/test/scala/sjc/delta/argonaut/RFC6902JsonSpec.scala
+[25]: https://github.com/travisbrown/circe/issues/281
+[26]: https://github.com/json4s/json4s#merging--diffing
+[27]: https://github.com/gnieh/diffson
