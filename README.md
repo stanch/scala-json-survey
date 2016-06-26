@@ -8,17 +8,36 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 
 ## Basic features
 
-| Base library | Custom codecs | Automatic codec derivation | Immutable manipulation | Diff & patch | JSON Schema |
-| --- | --- | --- | --- | --- | --- |
-| [Argonaut][10] | [typeclass-based][16] | [shapeless-based][14] | [included, zipper-based][11] | [yes][24] | ? |
-| [Circe][20] | [typeclass-based][20] | [included, shapeless-based][20] | [included, zipper-based][20] | [no][25] | ? |
-| [json4s][21] | [reflection-based][22] | [included, reflection-based][22] | [included, path-based][23] | [included][26] | ? |
-| [Play JSON][1] | [typeclass-based][17] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][27] | [yes][5] |
-| [Spray JSON][12] | [typeclass-based][12] | [included, reflection-based][12]; [shapeless-based][13] | [lens-based][15] | [yes][27] | ? |
+In this section we explore the essentials for working with JSON:
+
+* Simple JSON construction — an easy way to construct the JSON tree.
+  * *DSL* — something like `("name" -> "joe") ~ ("age" -> 35)` (json4s);
+  * *interpolator* — something like `json"""{name: "joe", age: 35}"""` (jsonquote).
+* Codecs — how data (mostly case classes) is converted to JSON.
+  * *typeclass-based* — a more flexible approach, checked at compile-time;
+  * *reflection-based* — somewhat non-idiomatic, not checked at compile-time.
+* Automatic codec derivation — whether manual labor is required to convert case classes and sealed traits into JSON.
+  * *macro-based* — fast, but typically somewhat ad-hoc and lacking support for sealed traits, multiple `apply` methods in the companions, etc;
+  * *shapeless-based* — might take more time to compile, but provides robust support for arbitrary case classes and sealed traits.
+* Immutable manipulation — an easy way to manipulate JSON, modify, remove fields, etc. (You can learn more about lenses and zippers from [my talk](https://github.com/stanch/unzimm)!)
+  * *zipper-based* — something like `(cursor --\ "outerKey" --\ "innerkey2").withFocus(_.withString(_ + "!"))` (argonaut);
+  * *lens-based* — something like `json.updateAs[String](__ \ "outerKey" \ "innerkey2", _ + "!")` (play-json-zipper — contrary to what the name suggests).
+* Diff & patch — diffing and patching JSON along the lines of [RFC 6902](https://tools.ietf.org/html/rfc6902).
+* JSON Schema — validing JSON against a schema along the lines of [RFC ???](http://json-schema.org/).
+
+| Base library | Simple JSON construction | Codecs | Automatic codec derivation | Immutable manipulation | Diff & patch | JSON Schema |
+| --- | --- | --- | --- | --- | --- | --- |
+| [Argonaut][10] | [included DSL][29] | [typeclass-based][16] | [included, macro-based][10]; [shapeless-based][14] | [included, zipper-based][11] | [yes][24] | ? |
+| [Circe][20] | ? | [typeclass-based][20] | [included, shapeless-based][20] | [included, zipper-based][20] | [no][25] | ? |
+| [json4s][21] | [included DSL][28] | [reflection-based][22] | [included, reflection-based][22] | [included, path-based][23] | [included][26] | ? |
+| [Play JSON][1] | [included][30]; [interpolator-based][31] | [typeclass-based][17] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][27] | [yes][5] |
+| [Spray JSON][12] | [interpolator-based][31] | [typeclass-based][12] | [included, reflection-based][12]; [shapeless-based][13] | [lens-based][15] | [yes][27] | ? |
 
 ## Library support
 
-| Library | Argonaut | Circe | json4s | Play JSON | Spray JSON |
+This section outlines the support for the above base libraries in the wild.
+
+| Project/topic | Argonaut | Circe | json4s | Play JSON | Spray JSON |
 | --- | --- | --- | --- | --- | --- |
 | Akka HTTP | [yes][6] | [yes][6] | [yes][6] | [yes][6] | [yes][6] |
 | JWT | ? | [yes][7] | [yes][7] | [yes][7] | [yes][7] |
@@ -58,3 +77,7 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 [25]: https://github.com/travisbrown/circe/issues/281
 [26]: https://github.com/json4s/json4s#merging--diffing
 [27]: https://github.com/gnieh/diffson
+[28]: https://github.com/json4s/json4s#dsl-rules
+[29]: http://argonaut.io/doc/json/
+[30]: https://www.playframework.com/documentation/2.5.x/ScalaJson#Converting-to-a-JsValue
+[31]: https://github.com/maffoo/jsonquote
