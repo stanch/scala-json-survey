@@ -8,18 +8,21 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 
 ## Basic features
 
-| Base library | Automatic codec derivation | Immutable manipulation | JSON Schema |
-| --- | --- | --- | --- |
-| [Play JSON][1] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][5] |
+| Base library | Custom codecs | Automatic codec derivation | Immutable manipulation | JSON Schema |
+| --- | --- | --- | --- | --- |
+| [Argonaut][10] | [typeclass-based][16] | [shapeless-based][14] | [included, zipper-based][11] | ? |
+| [Circe][20] | [typeclass-based][20] | [included, shapeless-based][20] | [included, zipper-based][20] | ? |
+| [Play JSON][1] | [typeclass-based][17] | [included, macro-based][2]; [shapeless-based][3] | [lens-based][4] | [yes][5] |
+| [Spray JSON][12] | [typeclass-based][12] | [included, reflection-based][12]; [shapeless-based][13] | [lens-based][15] | ? |
 
 ## Library support
 
-| Library | Play JSON |
-| --- | --- |
-| Akka HTTP | [yes][6] |
-| JWT | [yes][7] |
-| Slick Postgres | [yes][8] |
-| GeoJSON | [yes][9] |
+| Library | Argonaut | Circe | Play JSON | Spray JSON |
+| --- | --- | --- | --- | --- |
+| Akka HTTP | [yes][6] | [yes][6] | [yes][6] | [yes][6]
+| JWT | ? | [yes][7] | [yes][7] | [yes][7] |
+| Slick Postgres | [yes][8] | [yes][8] | [yes][8] | [yes][8] |
+| GeoJSON | [yes][19] | ? | [yes][9] | [yes][18] |
 
 ## Links and resources
 
@@ -36,3 +39,14 @@ This project aims to provide a comprehensive summary of JSON libraries in Scala:
 [7]: https://github.com/pauldijou/jwt-scala
 [8]: https://github.com/tminglei/slick-pg
 [9]: https://github.com/jroper/play-geojson
+[10]: http://argonaut.io/
+[11]: http://argonaut.io/doc/zipper/
+[12]: https://github.com/spray/spray-json
+[13]: https://github.com/fommil/spray-json-shapeless
+[14]: https://github.com/alexarchambault/argonaut-shapeless
+[15]: https://github.com/jrudolph/json-lenses
+[16]: http://argonaut.io/doc/codec/
+[17]: https://www.playframework.com/documentation/2.5.x/ScalaJsonCombinators
+[18]: https://github.com/MonsantoCo/mwundo
+[19]: https://github.com/shiplog/argonaut-geojson
+[20]: https://github.com/travisbrown/circe
